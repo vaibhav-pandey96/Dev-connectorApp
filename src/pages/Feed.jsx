@@ -1,14 +1,9 @@
-import PostForm from '../components/PostForm'
-import PostItem from '../components/PostItem'
-import PostFeed from '../components/PostFeed'
+import PostFeed from '../components/Feeds/PostFeed'
 
 const Feed = () => {
   return (
-    <div>
-      <PostForm/>
-       <PostFeed/>
-        <PostItem/>
-
+    <div className='bg-gray-400 m-0 p-0'> 
+      <PostFeed/>
     </div>
   )
 }
