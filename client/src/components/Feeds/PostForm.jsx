@@ -19,8 +19,8 @@ const PostForm = ({ onPostCreated }) => {
         { text },
         {
           headers: {
-            'x-auth-token': token
-          }
+             Authorization: `Bearer ${token}`,
+          },
         }
       );
       onPostCreated(res.data); // lift state up to parent

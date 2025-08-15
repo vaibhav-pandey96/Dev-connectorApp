@@ -46,6 +46,7 @@ const ProfileSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    
 });
 
 const Profile = mongoose.model('Profile', ProfileSchema);

@@ -3,6 +3,7 @@ import auth from '../middleware/auth.js';
 import Profile from '../models/Profile.js';
 import User from '../models/User.js';
 
+
 const router = express.Router();
 
 // @route    GET api/profile/me
@@ -18,6 +19,33 @@ router.get('/me', auth, async (req, res) => {
   } catch (err) {
     console.log(err);
     console.error(err);
+    res.status(500).send('Server Error');
+  }
+});
+
+// Get Github User
+router.get('',auth, async (req, res) =>{
+  const {
+    status,
+    skills,
+    githubUsername,
+  } = req.body;
+
+  const profileFields = {};
+  profileFields.user = req.user.id;
+  if (status) profileFields.status = status;
+  if (skills) profileFields.skills = skills.split(',').map(skill => skill.trim());
+  if (githubUsername) profileFields.githubUsername = githubUsername;
+
+  try {
+    let profile = await Profile.findOneAndUpdate(
+      { user: req.user.id },
+      { $set: profileFields },
+      { new: true, upsert: true }
+    );
+    res.json(profile);
+  } catch (error) {
+    console.error(err.message);
     res.status(500).send('Server Error');
   }
 });
