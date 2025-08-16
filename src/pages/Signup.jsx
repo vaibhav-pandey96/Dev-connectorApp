@@ -3,8 +3,10 @@ import { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { useSource } from '../context/SourceContext'
 
 const Signup = () => {
+  const {backendURL} = useSource();
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
 
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ const Signup = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/users', formData);
+      const res = await axios.post(`${backendURL}/api/users`, formData);
       localStorage.setItem('token', res.data.token);
       alert('Signup Successfull');
       navigate("/login");

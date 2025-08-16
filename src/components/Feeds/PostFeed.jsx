@@ -3,17 +3,19 @@ import axios from "axios";
 import PostForm from "./PostForm";
 import PostItem from "./PostItem";
 import { useNavigate } from "react-router-dom";
+import { useSource } from "../../context/SourceContext";
 
 const PostsFeed = () => {
   const [posts, setPosts] = useState([]);
   const userId = localStorage.getItem("userId");
   const Navigate = useNavigate();
+  const {backendURL} = useSource();
 
 
   const fetchPosts = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/post", {
+      const res = await axios.get(`${backendURL}/api/post`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -33,13 +35,12 @@ const PostsFeed = () => {
   };
 
   const handleLike = async (id) => {
-    alert("Like is clicked");
     console.log("userId:", userId);
     console.log("likes:", posts.likes);
     try {
       const token = localStorage.getItem("token");
       const res = await axios.put(
-        `/api/post/like/${id}`,
+        `${backendURL}/api/post/like/${id}`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -52,11 +53,10 @@ const PostsFeed = () => {
   };
 
   const handleUnlike = async (id) => {
-    alert("grgegseg");
     try {
       const token = localStorage.getItem("token");
       const res = await axios.put(
-        `/api/post/unlike/${id}`,
+        `${backendURL}/api/post/unlike/${id}`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -76,7 +76,7 @@ const PostsFeed = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/post/${id}`, {
+      await axios.delete(`${backendURL}/api/post/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPosts((prev) => prev.filter((post) => post._id !== id));

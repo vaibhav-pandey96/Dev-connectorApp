@@ -45,9 +45,6 @@ const PostForm = ({ onPostCreated }) => {
       <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
         Post
       </button>
-      <Link to="/create-profile" className="btn btn-primary">
-  Create Profile
-</Link>
     </form>
   );
 };
