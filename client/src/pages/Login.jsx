@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Signup from './Signup';
 import { useNavigate } from 'react-router-dom';
+import api from '../api';
+
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -21,7 +23,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const res = await axios.post('https://dev-connectorapp.onrender.com/api/auth/login', formData);
+      const res = await axios.post('/api/auth/login', formData);
       console.log('Token:', res.data.token);
       localStorage.setItem('token', res.data.token);
       alert('Login Succesfull')

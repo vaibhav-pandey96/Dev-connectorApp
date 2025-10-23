@@ -3,6 +3,8 @@ import axios from "axios";
 import PostForm from "./PostForm";
 import PostItem from "./PostItem";
 import { useNavigate } from "react-router-dom";
+import api from "../../api";
+
 
 const PostsFeed = () => {
   const [posts, setPosts] = useState([]);
@@ -13,7 +15,7 @@ const PostsFeed = () => {
   const fetchPosts = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("https://dev-connectorapp.onrender.com/api/post", {
+      const res = await axios.get("/api/post", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
