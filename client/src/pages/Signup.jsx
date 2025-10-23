@@ -18,7 +18,7 @@ const Signup = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/users', formData);
+      const res = await axios.post('https://dev-connectorapp.onrender.com/api/users', formData);
       localStorage.setItem('token', res.data.token);
       alert('Signup Successfull');
       navigate("/login");

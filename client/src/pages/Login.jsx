@@ -21,7 +21,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const res = await axios.post('https://dev-connectorapp.onrender.com/api/auth/login', formData);
       console.log('Token:', res.data.token);
       localStorage.setItem('token', res.data.token);
       alert('Login Succesfull')

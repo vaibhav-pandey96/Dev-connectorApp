@@ -13,7 +13,7 @@ const PostsFeed = () => {
   const fetchPosts = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/post", {
+      const res = await axios.get("https://dev-connectorapp.onrender.com/api/post", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -74,7 +74,7 @@ const PostsFeed = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/post/${id}`, {
+      await axios.delete(`https://dev-connectorapp.onrender.com/api/post/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPosts((prev) => prev.filter((post) => post._id !== id));
