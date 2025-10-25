@@ -15,13 +15,22 @@ connectDB();
 app.use(express.json());
 
 const allowedOrigins = [
-  'https://dev-connector-feuzzm34c-vaibhav-pandeys-projects-78e503d4.vercel.app'
+  "http://localhost:5173",
+  "https://dev-connectorapp.onrender.com"
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like Postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error("Not allowed by CORS"));
+    }
+  },
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+  credentials: true,
 }));
 
 app.use('/api/users', userRoutes);
