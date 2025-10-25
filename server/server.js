@@ -15,7 +15,7 @@ connectDB();
 app.use(express.json());
 
 app.use(cors({
-  origin: 'https://dev-connector-app-eight.vercel.app',
+  origin: '*',
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
