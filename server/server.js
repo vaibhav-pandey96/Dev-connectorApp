@@ -15,7 +15,7 @@ connectDB();
 app.use(express.json());
 
 const allowedOrigins = [
-  'https://dev-connector-app-eight.vercel.app'
+  'https://dev-connector-feuzzm34c-vaibhav-pandeys-projects-78e503d4.vercel.app'
 ];
 
 app.use(cors({
