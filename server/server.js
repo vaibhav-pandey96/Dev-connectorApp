@@ -16,7 +16,7 @@ app.use(express.json());
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://dev-connectorapp.onrender.com"
+  "https://dev-connector-app-eight.vercel.app/"
 ];
 
 app.use(cors({
