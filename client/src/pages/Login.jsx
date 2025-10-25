@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import api from '../api';
+import axios from 'axios';
 
 
 function Login() {
@@ -9,6 +10,8 @@ function Login() {
     email: '',
     password: ''
   });
+
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const navigate = useNavigate();
 
@@ -20,7 +23,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const res = await api.post('/api/auth/login', formData);
+      const res = await axios.post(`${API_BASE_URL}/api/auth/login`, formData);
       console.log('Token:', res.data.token);
       localStorage.setItem('token', res.data.token);
       alert('Login Succesfull')
