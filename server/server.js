@@ -14,8 +14,13 @@ connectDB();
 
 app.use(express.json());
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://dev-connector-app-eight.vercel.app'
+];
+
 app.use(cors({
-  origin: '*',
+  origin: allowedOrigins,
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
