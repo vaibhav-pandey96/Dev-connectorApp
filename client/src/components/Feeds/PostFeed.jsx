@@ -15,7 +15,7 @@ const PostsFeed = () => {
   const fetchPosts = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("/api/post", {
+      const res = await api.get("/api/post", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
