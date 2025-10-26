@@ -16,7 +16,7 @@ app.use(express.json());
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://dev-connector-app-eight.vercel.app/"
+  "https://dev-connector-a1cqo7amg-vaibhav-pandeys-projects-78e503d4.vercel.app"
 ];
 
 app.use(cors({
@@ -30,6 +30,7 @@ app.use(cors({
     }
   },
   methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
 }));
 
