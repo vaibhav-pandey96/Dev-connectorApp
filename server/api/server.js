@@ -12,11 +12,10 @@ const app = express();
 
 connectDB();
 
-app.use(express.json());
-
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://dev-connector-ipqr6uxhi-vaibhav-pandeys-projects-78e503d4.vercel.app"
+  "https://dev-connector-app-eight.vercel.app",
+  /\.vercel\.app$/ 
 ];
 
 app.use(cors({
@@ -33,6 +32,8 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
 }));
+
+app.use(express.json());
 
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
