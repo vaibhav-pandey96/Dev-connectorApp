@@ -7,6 +7,11 @@ import { useNavigate } from 'react-router-dom'
 const Signup = () => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
 
+  const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL
+  });
+
+
   const navigate = useNavigate();
 
   const { name, email, password } = formData;
@@ -18,7 +23,7 @@ const Signup = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await axios.post('/api/users', formData);
+      const res = await api.post('/api/users', formData);
       localStorage.setItem('token', res.data.token);
       alert('Signup Successfull');
       navigate("/login");
