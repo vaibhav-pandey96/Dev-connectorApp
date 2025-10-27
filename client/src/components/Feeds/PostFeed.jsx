@@ -3,14 +3,15 @@ import axios from "axios";
 import PostForm from "./PostForm";
 import PostItem from "./PostItem";
 import { useNavigate } from "react-router-dom";
-import api from "../../api";
 
 
 const PostsFeed = () => {
   const [posts, setPosts] = useState([]);
-  const userId = localStorage.getItem("userId");
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
+    const api = axios.create({
+    baseURL: import.meta.env.VITE_API_URL,
+  });
 
   const fetchPosts = async () => {
     try {
@@ -34,17 +35,13 @@ const PostsFeed = () => {
     setPosts((prev) => [newPost, ...prev]);
   };
 
-  const handleLike = async (id) => {
-    console.log("userId:", userId);
-    console.log("likes:", posts.likes);
+ const handleLike = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.put(
+      const res = await api.put(
         `/api/post/like/${id}`,
         {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       updateLikes(id, res.data);
     } catch (err) {
@@ -55,19 +52,12 @@ const PostsFeed = () => {
   const handleUnlike = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.put(
+      const res = await api.put(
         `/api/post/unlike/${id}`,
         {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       updateLikes(id, res.data);
-      setPosts((prevPosts) =>
-        prevPosts.map((post) =>
-          post._id === id ? { ...post, likes: res.data } : post
-        )
-      );
     } catch (err) {
       console.error("Unlike failed:", err);
     }
@@ -76,7 +66,7 @@ const PostsFeed = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`https://dev-connectorapp.onrender.com/api/post/${id}`, {
+      await api.delete(`/api/post/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPosts((prev) => prev.filter((post) => post._id !== id));
@@ -85,7 +75,7 @@ const PostsFeed = () => {
     }
   };
 
-  const updateLikes = (id, likes) => {
+   const updateLikes = (id, likes) => {
     setPosts((prev) =>
       prev.map((post) => (post._id === id ? { ...post, likes } : post))
     );
@@ -93,9 +83,9 @@ const PostsFeed = () => {
 
   const handleSignout = () => {
     localStorage.removeItem("token");
-    Navigate('/');
-    window.location.href = '/';
+    navigate("/");
   };
+
 
   return (
     <div className="max-w-xl mx-auto bg-gray-400 h-screen p-5">
