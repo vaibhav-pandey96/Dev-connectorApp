@@ -1,11 +1,11 @@
 import express from 'express';
-import connectDB from '../server/config/db.js';
+import connectDB from '../config/db.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import userRoutes from '../server/routes/users.js'
-import authRoutes from '../server/routes/auth.js'
-import profileRoutes from '../server/routes/profile.js';
-import postRoutes from '../server/routes/post.js';
+import userRoutes from '../routes/users.js'
+import authRoutes from '../routes/auth.js'
+import profileRoutes from '../routes/profile.js';
+import postRoutes from '../routes/post.js';
 
 dotenv.config();
 const app = express();
