@@ -5,6 +5,10 @@ const PostForm = ({ onPostCreated }) => {
   const [text, setText] = useState('');
   const [error, setError] = useState('');
 
+  const api = axios.create({
+    baseURL: import.meta.env.VITE_API_URL
+  });
+
   const token = localStorage.getItem('token');
 
   const handleSubmit = async (e) => {
@@ -14,7 +18,7 @@ const PostForm = ({ onPostCreated }) => {
     if (!text.trim()) return setError('Post cannot be empty');
 
     try {
-      const res = await axios.post(
+      const res = await api.post(
         '/api/post',
         { text },
         {
